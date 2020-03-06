@@ -22,7 +22,9 @@ module:
 dependencies:
   flutter:
     sdk: flutter
-  camera: ^0.5.6+3
+  camera_camera: any
+  googleapis: any
+  googleapis_auth: any
   path_provider: any
   path: any
 

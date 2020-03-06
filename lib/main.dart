@@ -1,5 +1,8 @@
+import 'dart:io';
+
+import 'package:camera_camera/camera_camera.dart';
 import 'package:flutter/material.dart';
-import 'camera.dart';
+import 'vision.dart';
 
 void main() => runApp(MyApp());
 
@@ -45,6 +48,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  File img;
 
   @override
   Widget build(BuildContext context) {
@@ -87,11 +91,28 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-         launchCamera();
+        onPressed: () async {
+          img = await showDialog(
+              context: context,
+              builder: (context) => Camera(
+                mode: CameraMode.normal,
+                orientationEnablePhoto: CameraOrientation.all,
+                /*
+                      imageMask: CameraFocus.square(
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                      */
+              ));
+          setState(() {});
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AnalyzePictureScreen(image: img),
+            ),
+          );
         },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+        tooltip: 'Take picture',
+        child: Icon(Icons.camera),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
