@@ -90,8 +90,8 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () {
          launchCamera();
         },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+        tooltip: 'Camera',
+        child: Icon(Icons.camera_alt),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

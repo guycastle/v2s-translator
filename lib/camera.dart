@@ -5,6 +5,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
+import 'package:vts_trans/main.dart';
 
 Future<void> launchCamera() async {
   // Ensure that plugin services are initialized so that `availableCameras()`
