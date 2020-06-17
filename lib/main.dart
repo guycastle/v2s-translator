@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:camera_camera/camera_camera.dart';
 import 'package:flutter/material.dart';
-import 'vision.dart';
+import 'intelligentinterfaces.dart';
 
 void main() => runApp(MyApp());
 

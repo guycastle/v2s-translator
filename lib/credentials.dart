@@ -1,3 +1,4 @@
+import 'package:googleapis/texttospeech/v1.dart';
 import 'package:googleapis/vision/v1.dart';
 import 'package:googleapis_auth/auth_io.dart';
 
@@ -24,7 +25,7 @@ class CredentialsProvider {
 
   Future<AutoRefreshingAuthClient> get client async {
     AutoRefreshingAuthClient _client = await clientViaServiceAccount(
-        await _credentials, [VisionApi.CloudVisionScope]).then((c) => c);
+        await _credentials, [VisionApi.CloudVisionScope, TexttospeechApi.CloudPlatformScope]).then((c) => c);
     return _client;
   }
 }
