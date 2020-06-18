@@ -16,22 +16,6 @@ Future<PictureAnalysis> analyzePicture(File path) async {
   // Create a string buffer to build up a sentence describing what is seen.
   StringBuffer sentence = new StringBuffer();
   try {
-    List<PictureAnalysis> blah = null;
-    if (blah?.isNotEmpty ?? false) {
-      print("GAMOUT: THIS IS GOOD");
-    }
-    blah = new List();
-    if (blah?.isNotEmpty ?? false) {
-      print("GAMOUT2: THIS IS GOOD");
-    }
-    blah.add(new PictureAnalysis());
-    if (blah?.isNotEmpty ?? false) {
-      print("GAMOUT3: THIS IS GOOD");
-    }
-  } catch (e) {
-    print(e);
-  }
-  try {
     // The minimum score before including the result in our description
     var minimumScore = 0.5;
     // Same thing but for likelihood
@@ -147,7 +131,7 @@ Future<PictureAnalysis> analyzePicture(File path) async {
           for (final l in a.webDetection.bestGuessLabels) webLabels.add(l.label);
           if (webLabels.isNotEmpty) {
             analysis.setWebLabels(webLabels.join(", "));
-            sentence.write("${analysis.text?.isNotEmpty ?? false ? "" : "Finally,"} to find more similar pictures, you could try an online search with the following ${webLabels.length} label${webLabels.length > 1 ? "s": ""}: ${analysis.webLabels}. ");
+            sentence.write("${analysis.text?.isNotEmpty ?? false ? "I" : "Finally, i"}n order to find more similar pictures, you could try an online search with the following ${webLabels.length} label${webLabels.length > 1 ? "s": ""}: ${analysis.webLabels}. ");
           }
         }
         if (analysis.text?.isNotEmpty ?? false) sentence.write("Finally, I was able to read the following text: ${analysis.text}");
@@ -178,6 +162,7 @@ Future<PictureAnalysis> analyzePicture(File path) async {
     }
   } catch (e) {
     print(e);
+    analysis.setError(e.toString());
   }
   return analysis;
 }
@@ -192,6 +177,7 @@ class PictureAnalysis {
   String _faces;
   String _landmarks;
   String _sentence;
+  String _error;
   ByteData _audio;
 
   void setProducts(String products) {
@@ -272,6 +258,14 @@ class PictureAnalysis {
 
   ByteData get audio {
     return this._audio;
+  }
+
+  void setError(String error) {
+    this._error = error;
+  }
+
+  String get error {
+    return this._error;
   }
 }
 
@@ -362,6 +356,15 @@ class AnalyzePictureScreen extends StatelessWidget {
           children: <TextSpan>[
             TextSpan(text: 'Description: ', style: topicStyle),
             TextSpan(text: a.sentence)
+          ]
+      )));
+    }
+    if (a.error != null) {
+      txts.add(RichText(text: new TextSpan(
+          style: defaultStyle,
+          children: <TextSpan>[
+            TextSpan(text: 'Error: ', style: topicStyle),
+            TextSpan(text: a.error)
           ]
       )));
     }
