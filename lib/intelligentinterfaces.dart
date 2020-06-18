@@ -121,7 +121,7 @@ Future<PictureAnalysis> analyzePicture(File path) async {
           }
           if (landmarks.isNotEmpty) {
             analysis.setLandmarks(landmarks.join(", "));
-            sentence.write("I'm pretty sure I can ${sentence.length > 0 ? "also" : ""} recognize ${landmarks.length} landmark${landmarks.length > 1 ? "s": ""}: ${analysis.landmarks}");
+            sentence.write("I'm pretty sure I can ${sentence.length > 0 ? "also" : ""} recognize ${landmarks.length} landmark${landmarks.length > 1 ? "s": ""}: ${analysis.landmarks}. ");
             print(sentence);
           }
         }
