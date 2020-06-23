@@ -1,3 +1,8 @@
-# VTSTrans
+# V2S Translator
 
-Test
+More information to follow.
+
+To build
+```bash
+flutter build apk
+```
